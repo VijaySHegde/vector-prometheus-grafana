@@ -1,0 +1,18 @@
+[sources.in]
+
+  type = "vector" # required
+
+  address = "0.0.0.0:9000" # required
+
+[sinks.out]
+
+  type = "prometheus" # required
+
+  inputs = ["in"] # required
+
+  address = "0.0.0.0:9090" # required
+
+  namespace = "service" # required
+
+  
+
