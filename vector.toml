@@ -1,1 +1,16 @@
 
+
+[sources.in]
+  type = "host_metrics" # required
+  collectors = ["cpu", "disk", "filesystem", "load", "host", "memory", "network"] # optional, default
+  scrape_interval_secs = 15 # optional, default, seconds
+ 
+[sinks.out]
+  # General
+  type = "prometheus_exporter" # required
+  inputs = ["in", "prefix-*"] # required
+  address = "107.21.46.98:9598" # required
+  default_namespace = "service" # optional, no default
+ 
+[api]
+  enabled = true
