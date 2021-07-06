@@ -1,5 +1,3 @@
-
-
 [sources.in]
   type = "host_metrics" # required
   collectors = ["cpu", "disk", "filesystem", "load", "host", "memory", "network"] # optional, default
