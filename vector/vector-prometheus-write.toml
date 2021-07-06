@@ -1,1 +1,27 @@
 
+[sources.in]
+
+  type = "host_metrics" # required
+
+  collectors = ["cpu", "disk", "filesystem", "load", "host", "memory", "network"] # optional, default
+
+  scrape_interval_secs = 15 # optional, default, seconds
+
+ 
+
+[sinks.out]
+
+  # General
+
+  type = "prometheus_remote_write" # required
+
+  inputs = ["in", "prefix-*"] # required
+
+  default_namespace = "service" # optional, no default
+
+  endpoint = "http://107.21.46.98:9090/" # required
+
+  # Healthcheck
+
+  healthcheck.enabled = true # optional, default
+
