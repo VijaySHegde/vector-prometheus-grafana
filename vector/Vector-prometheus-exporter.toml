@@ -1,0 +1,46 @@
+[api]
+
+enabled = true
+
+address = "107.21.46.98:8686"
+
+[sources.my_source_id]
+
+  type = "host_metrics" # required
+
+  collectors = ["cpu", "disk", "filesystem", "load", "host", "memory", "network"] # optional, default
+
+  scrape_interval_secs = 15 # optional, default, seconds
+
+ 
+
+[transforms.my_transform_id]
+
+  type = "remap" # required
+
+  inputs = ["my_source_id", "prefix-*"] # required
+
+  source = '''
+
+  . = parse_json!(.message)
+
+  .new_field = "new value"
+
+  .status = to_int!(.status)
+
+  .duration = parse_duration!(.duration, "s")
+
+  .new_name = del(.old_name)
+
+  '''
+
+[sinks.out]
+
+  type = "prometheus_exporter" # required
+
+  inputs = ["my_transform_id", "prefix-*"] # required
+
+  address = "107.21.46.98:9090" # required
+
+  default_namespace = "service" # optional, no default
+
